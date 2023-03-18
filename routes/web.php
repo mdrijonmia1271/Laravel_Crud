@@ -35,7 +35,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('category/index', [CategoryController::class, 'index']);
-Route::post('category', [CategoryController::class, 'addCategory']);
+Route::post('add/category', [CategoryController::class, 'create']);
+Route::get('delete/category/{id}', [CategoryController::class, 'delete']);
 
 
 require __DIR__.'/auth.php';
