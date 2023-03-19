@@ -14,7 +14,8 @@ class CategoryController extends Controller
 
     public function index(){
         return view('category.index',[
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'deleted_categories' => Category::onlyTrashed()->get()
         ]);
     }
 
@@ -32,6 +33,29 @@ class CategoryController extends Controller
     public function delete($id){
         Category::find($id)->delete();
         return back()->with('delete','Successfully Data Deleted!');
+    }
+    public function edit ($id){
+        return view('category.edit',[
+            'categories' => Category::find($id)
+        ]); 
+    }
+    public function update(Request $request){
+        $request->validate([
+            'category_name' => 'unique:categories,category_name,'.$request->category_id
+        ]);
+        Category::find($request->category_id)->update([
+            'category_name' => $request->category_name,
+            'category_description' => $request->category_description,
+        ]);
+        return redirect('category/index')->with('update','Successfully Data Updated!');;
+    }
+    public function restore($id){
+        Category::withTrashed()->find($id)->restore();
+        return back()->with('restore', 'Successfully Data Restore!');
+    }
+    public function forceDelete($id){
+        Category::withTrashed()->find($id)->forceDelete();
+        return back()->with('forceDelete', 'Successfully Data Permanently Deleted!');
     }
    
 }

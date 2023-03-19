@@ -19,3 +19,13 @@ body{
     padding: 15px;
     background-color: aliceblue;
 }
+.list_category_active{
+    margin-bottom: 5px;
+    color: rgb(40, 153, 190);
+    
+}
+.list_category_delete{
+    margin-bottom: 5px;
+    color: rgb(216, 31, 31);
+    
+}
