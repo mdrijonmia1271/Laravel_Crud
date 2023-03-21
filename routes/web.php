@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileEditController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//CategoryController Route-------
 Route::get('category/index', [CategoryController::class, 'index']);
 Route::post('add/category', [CategoryController::class, 'create']);
 Route::get('edit/category/{id}', [CategoryController::class, 'edit']);
@@ -42,5 +44,10 @@ Route::get('delete/category/{id}', [CategoryController::class, 'delete']);
 Route::get('restore/category/{id}', [CategoryController::class, 'restore']);
 Route::get('force/delete/category/{id}', [CategoryController::class, 'forceDelete']);
 
+
+//Profile Edit Conteroller_02 Route---------
+Route::get('user/profile/edit',[UserProfileEditController::class,'user_profile_edit']);
+Route::post('user/profile/update',[UserProfileEditController::class,'user_profile_update']);
+Route::post('user/password/update',[UserProfileEditController::class,'user_password_update']);
 
 require __DIR__.'/auth.php';

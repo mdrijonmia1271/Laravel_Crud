@@ -29,19 +29,29 @@
       @yield('body')
   {{-- <script src="{{ asset('/assets/deshboard/js/jquery-2.2.4.min.js') }}" ></script>
   <script src="{{ asset('/assets/deshboard/js/bootstrap.min.js') }}" ></script>
-  <script src="{{ asset('/assets/deshboard/js/app.js') }}"></script>
-  <script>
+  <script src="{{ asset('/assets/deshboard/js/app.js') }}"></script> --}}
+  {{-- <script>
     function onclickErrorHide() {
         var displayStatus = document.querySelector(".alert");
         displayStatus.style.display = 'none';
     };
-</script> --}}
+</script>  --}}
 
 
   <!-- <script src="./js/jquery-2.2.4.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="./js/app.js"></script> -->
+  <script>
+    function showPassword() {
+      var x = document.getElementById("passwordInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
  
 </body>
 

@@ -13,7 +13,7 @@ class CategoryController extends Controller
     //
 
     public function index(){
-        return view('category.index',[
+        return view('admin/category.index',[
             'categories' => Category::all(),
             'deleted_categories' => Category::onlyTrashed()->get()
         ]);
@@ -35,7 +35,7 @@ class CategoryController extends Controller
         return back()->with('delete','Successfully Data Deleted!');
     }
     public function edit ($id){
-        return view('category.edit',[
+        return view('admin/category.edit',[
             'categories' => Category::find($id)
         ]); 
     }
