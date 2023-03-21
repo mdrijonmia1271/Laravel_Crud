@@ -35,3 +35,15 @@ body{
     padding: 15px;
     background-color:blanchedalmond;
 }
+#active_table{
+    border: solid rgb(240, 230, 230) 1px;
+    border-radius: 5px;
+    padding: 15px;
+    background-color:azure;
+}
+#deleted_table{
+    border: solid rgb(240, 230, 230) 1px;
+    border-radius: 5px;
+    padding: 15px;
+    background-color:rgb(241, 220, 220);
+}

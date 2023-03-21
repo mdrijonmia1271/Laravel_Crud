@@ -57,5 +57,27 @@ class CategoryController extends Controller
         Category::withTrashed()->find($id)->forceDelete();
         return back()->with('forceDelete', 'Successfully Data Permanently Deleted!');
     }
+    public function markDelete(Request $request){
+        foreach($request->category_id as $cate_id){
+            Category::find($cate_id)->delete();
+        }
+        return back();
+    }
+    public function markRestore(Request $request){
+        // dd($request);
+        if($request['Restore_All']){
+            foreach($request->delete_category_id as $delete_cate_id){
+                Category::withTrashed()->where($delete_cate_id)->restore();
+            }
+        }
+        if($request['Delete_All']){
+            // foreach($request->delete_category_id as $delete_cate_id){
+            //     Category::withTrashed()->find($delete_cate_id)->forceDelete();
+            // }
+            Category::withTrashed()->whereIn('id',$request->delete_category_id)->forceDelete();
+        }
+        return back();
+        
+    }
    
 }
