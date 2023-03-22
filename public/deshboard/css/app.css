@@ -1,9 +1,12 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 body{
-    padding: auto;
+    
+}
+#user_table{
+    margin: 15px;
 }
 .button{
     color: black;
@@ -13,15 +16,9 @@ body{
    font-size: 29px;
    padding: 9px;
 }
-#form{
-    border: solid rgb(150, 136, 136) 1px;
-    border-radius: 9px;
-    padding: 15px;
-    background-color: aliceblue;
-}
 .list_category_active{
     margin-bottom: 5px;
-    color: rgb(119, 203, 231);
+    color: rgb(40, 153, 190);
     
 }
 .list_category_delete{
@@ -29,7 +26,15 @@ body{
     color: rgb(216, 31, 31);
     
 }
+#form{
+    margin-top: 25px;
+    border: solid rgb(150, 136, 136) 1px;
+    border-radius: 9px;
+    padding: 15px;
+    background-color: rgb(214, 229, 243);
+}
 #password_form{
+    margin-top: 25px;
     border: solid rgb(150, 136, 136) 1px;
     border-radius: 9px;
     padding: 15px;
@@ -39,7 +44,7 @@ body{
     border: solid rgb(245, 238, 238) 1px;
     border-radius: 5px;
     padding: 15px;
-    background-color:azure;
+    background-color:rgb(224, 238, 238);
 }
 #deleted_table{
     border: solid rgb(240, 230, 230) 1px;

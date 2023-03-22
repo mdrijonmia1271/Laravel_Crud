@@ -1,17 +1,9 @@
-{{-- <x-app-layout> --}}
-{{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
+
 @extends('layout')
 
-{{-- <div class="py-12"> --}}
-@include('layouts.navigation')
-<div style="margin-top: 50px" class="max-w-7 mx-auto t-10px">
+<div class="max-w-7 mx-auto t-10px">
     @section('body')
-        <div class="container">
-            <div class="row">
+            <div style="margin:10px" class="row">
                 <div class="col-4 m-auto">
                     @if (session('name_change'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -25,7 +17,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <div id="form" class="mb-9">
+                    <div id="form">
                         <form class="" action="{{ url('user/profile/update') }}" method="post">
                             @csrf
 
@@ -61,7 +53,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <div id="password_form" class="mb-9">
+                    <div id="password_form">
 
                         <form class="" action="{{ url('user/password/update') }}" method="post">
                             @csrf
@@ -92,7 +84,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

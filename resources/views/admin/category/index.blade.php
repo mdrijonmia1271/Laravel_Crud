@@ -7,11 +7,11 @@
 @extends('layout')
 
 {{-- <div class="py-12"> --}}
-@include('layouts.navigation')
-<div style="margin-top: 50px" class="max-w-7 mx-auto t-10px">
+{{-- @include('layouts.navigation') --}}
+<div class="max-w-7 mx-auto t-10px">
     @section('body')
-        <div class="container">
-            <div class="row">
+        <div class="contai">
+            <div style="margin: 15px"  class="row">
                 <div class="col-9">
                     {{-- Insered data table inserted---------- --}}
                     <div id="active_table">
@@ -32,15 +32,15 @@
                             @csrf
                             <table class="table table-striped table-bordered">
                                 <div class="list_category_active">List Category (Active)</div>
-                                <thead style="background-color: rgb(120, 132, 164); padding-top:50px">
+                                <thead style="background-color: rgb(182, 198, 241); padding-top:50px">
                                     <tr>
                                         <th class="het" scope="col">Mark</th>
                                         <th class="het" scope="col">ID</th>
                                         <th class="het" scope="col">Category Name</th>
                                         <th class="het" scope="col">Description</th>
-                                        <th class="het" scope="col">Created By</th>
-                                        <th class="het" scope="col">Created At</th>
-                                        {{-- <th class="het" scope="col">Updated At</th> --}}
+                                        <th class="het" scope="col">Created</th>
+                                        <th class="het" scope="col">Created</th>
+                                        <th class="het" scope="col">Updated</th>
                                         <th class="het" scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -56,7 +56,11 @@
                                             <td>{{ $category->category_description }}</td>
                                             <td>{{ App\Models\User::find($category->user_id)->name }}</td>
                                             <td>{{ $category->created_at->format('d/m/Y h:i:s A') }}</td>
-                                            {{-- <td>{{ $category->updated_at->diffForHumans() }}</td> --}}
+                                            <td>
+                                                @isset($category->updated_at)
+                                                    {{ $category->updated_at->diffForHumans() }}
+                                                @endisset
+                                            </td>
                                             <td>
                                                 <a href="{{ url('edit/category/') }}/{{ $category->id }}" type="button"
                                                     class="btn btn-sm btn-outline-primary">Edit</a>
@@ -98,8 +102,8 @@
                             @csrf
                             <table class="table table-striped table-bordered">
                                 <div class="list_category_delete">List Category (Deleted)</div>
-    
-                                <thead style="background-color: rgb(120, 132, 164); padding-top:50px">
+
+                                <thead style="background-color: rgb(166, 177, 207); padding-top:50px">
                                     <tr>
                                         <th class="het" scope="col">Mark</th>
                                         <th class="het" scope="col">ID</th>
@@ -114,7 +118,8 @@
                                     @forelse ($deleted_categories as $deleted_category)
                                         <tr>
                                             <td>
-                                                <input type="checkbox" name="delete_category_id[]" value="{{ $deleted_category->id }}">
+                                                <input type="checkbox" name="delete_category_id[]"
+                                                    value="{{ $deleted_category->id }}">
                                             </td>
                                             <th scope="row">{{ $loop->index + 1 }}</th>
                                             {{-- <th scope="row">{{ $users->firstItem() + $serial++ }}</th> --}}
@@ -128,7 +133,7 @@
                                                 <a href="{{ url('force/delete/category') }}/{{ $deleted_category->id }}"
                                                     onclick="return confirm('Are you sure to Force delete')" type="button"
                                                     class="btn btn-sm btn-outline-danger">F.Delete</a>
-    
+
                                                 {{-- <a href="{{ route('deleteCategory', $row->id) }}" onclick="return confirm('Are you sure to delete')" type="button" class="btn btn-sm btn-outline-danger">Delete</a> --}}
                                             </td>
                                         </tr>
@@ -140,8 +145,10 @@
                                 </tbody>
                             </table>
                             {{-- <button type="submit" class="btn btn-sm btn-outline-success">Mark Restore</button> --}}
-                            <input type="submit" class="btn btn-sm btn-outline-success" value="Restore All" name="Restore_All">
-                            <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete All" name="Delete_All">
+                            <input type="submit" class="btn btn-sm btn-outline-success" value="Restore All"
+                                name="Restore_All">
+                            <input type="submit" onclick="return confirm('Are you sure to Permanently delete data')" class="btn btn-sm btn-outline-danger" value="Delete All"
+                                name="Delete_All">
                         </form>
                     </div>
                     {{-- //Deleted data table started-------------- --}}
@@ -181,7 +188,7 @@
                           <input type="password" class="form-control">
                         </div> --}}
                             <br>
-                            <button type="submit" class="btn btn-primary button">Submit</button>
+                            <button type="submit" class="btn btn-outline-primary">Submit</button>
                         </form>
                     </div>
                 </div>

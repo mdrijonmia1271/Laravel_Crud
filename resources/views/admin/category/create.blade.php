@@ -1,13 +1,6 @@
-{{-- <x-app-layout> --}}
-{{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
+
     @extends('layout')
 
-    {{-- <div class="py-12"> --}}
-    @include('layouts.navigation')
     <div style="margin-top: 50px" class="max-w-7xl mx-auto t-10px">
         @section('body')
         <div class="container">
@@ -30,8 +23,7 @@
               </div>
             </div>
           </div>
-
-
+          
         <div class="col-md-4"></div>
         <div class="col-md-4"></div>
         <div class="col-md-4">

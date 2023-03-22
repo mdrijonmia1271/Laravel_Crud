@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPanelController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileEditController;
@@ -51,5 +52,10 @@ Route::get('force/delete/category/{id}', [CategoryController::class, 'forceDelet
 Route::get('user/profile/edit',[UserProfileEditController::class,'user_profile_edit']);
 Route::post('user/profile/update',[UserProfileEditController::class,'user_profile_update']);
 Route::post('user/password/update',[UserProfileEditController::class,'user_password_update']);
+
+
+//Admin Panel Controller Routes-----------
+Route::get('admin/panel/index',[AdminPanelController::class,'index']);
+
 
 require __DIR__.'/auth.php';
