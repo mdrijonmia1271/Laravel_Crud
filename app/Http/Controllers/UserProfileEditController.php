@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class UserProfileEditController extends Controller
 {
@@ -28,29 +29,51 @@ class UserProfileEditController extends Controller
             return back()->with('name_change', 'Successfully User Name Changed!');
         } else {
             $laft_days = Carbon::now()->diffInDays(Auth::user()->updated_at->addDays(30));
-            return back()->with('laft_days','You can change user name after '.$laft_days.' days!');
+            return back()->with('laft_days', 'You can change user name after ' . $laft_days . ' days!');
         }
     }
     public function user_password_update(Request $request)
     {
         $request->validate([
             'password' => 'confirmed|min:8|alpha-num',
-        ],[
-           'password.confirmed' => 'Confirm Password Not Match !',
-           'password.min:8' => 'Password Must be more than 8 !',
-        ]);
-        if(Hash::check( $request->old_password, Auth::user()->password)) {
-            if($request->old_password == $request->password){
-                return back()->with('new_password_error','Puran password abar disen kno!');
-            }else{
+        ], [
+                'password.confirmed' => 'Confirm Password Not Match !',
+                'password.min:8' => 'Password Must be more than 8 !',
+            ]);
+        if (Hash::check($request->old_password, Auth::user()->password)) {
+            if ($request->old_password == $request->password) {
+                return back()->with('new_password_error', 'Puran password abar disen kno!');
+            } else {
                 User::find(Auth::user()->id)->update([
                     'password' => Hash::make($request->password),
                 ]);
                 return back();
             }
-        }else{
-           return back()->with('old_password_error','Your old password does not match with database !');
+        } else {
+            return back()->with('old_password_error', 'Your old password does not match with database !');
         }
-       
+
+    }
+    public function profile_photo_change(Request $request)
+    {
+        $request->validate([
+            'profile_photo' => 'required|image'
+        ]);
+        if ($request->hasFile('profile_photo')) {
+            if(Auth::user()->profile_photo != 'default.png'){
+                //delete Old Photo
+                $old_photo_location = 'public/uploads/profile_photos/'.Auth::user()->profile_photo;
+                unlink(base_path($old_photo_location));
+            }
+            $uploaded_photo = $request->file('profile_photo');
+            $new_upload_name = Auth::user()->id . "." . $uploaded_photo->getClientOriginalExtension();
+            $new_upload_location = 'public/uploads/profile_photos/' . $new_upload_name;
+            Image::make($uploaded_photo)->resize(200,200)->save(base_path($new_upload_location), 50);
+            User::find(Auth::user()->id)->update([
+                'profile_photo' => $new_upload_name,
+            ]);
+            return back();
+            
+        } 
     }
 }
