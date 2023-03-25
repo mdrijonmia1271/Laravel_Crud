@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('category_name', 55)->unique();
             $table->string('category_description', 150);
-            $table->string('user_id');
+            $table->string('user_id')->comment('Relation with user table');
+            $table->string('category_photo')->default('default.png');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,14 +2,22 @@
 <html lang="en">
 
 <head>
-    <title>Admin Panel</title>
+    <title>
+        @yield('title', 'Admin Panel')
+    </title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="" href=" {{ asset('/deshboard/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" type="" href=" {{ url('/deshboard/css/style.css') }}" />
-    <link rel="stylesheet" type="" href=" {{ url('/deshboard/css/app.css') }}" />
-    <link rel="stylesheet" type="" href=" {{ url('/deshboard/css/responsive.css') }}" />
+    <link rel="stylesheet" href=" {{ asset('/deshboard/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href=" {{ url('/deshboard/css/style.css') }}" />
+    <link rel="stylesheet" href=" {{ url('/deshboard/css/responsive.css') }}" />
+    <link rel="stylesheet" href=" {{ url('/deshboard/css/app.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2016/03/02/13/59/bird-1232416__340.png" type="image/gif"
+    sizes="16x16">
+    {{--Add data table css link --}}
+    <link rel="stylesheet" href=" {{ url('/deshboard/css/dataTable.bootstrap.min.css') }}" />
+    <link rel="stylesheet" href=" {{ url('/deshboard/css/dataTables.bootstrap5.min.css') }}" />
+
     {{-- <link
     href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;500;700;900&family=Rubik:wght@400;500;600;700&display=swap"
     rel="stylesheet" /> --}}
@@ -80,7 +88,8 @@
                                 <div class="user-details" data-bs-toggle="collapse"
                                     data-bs-target="#multiCollapseExample2" aria-expanded="false"
                                     aria-controls="multiCollapseExample2">
-                                    <img src="{{ asset('uploads/profile_photos') }}/{{ Auth::user()->profile_photo }}" alt="User-Profile-Image">
+                                    <img src="{{ asset('uploads/profile_photos') }}/{{ Auth::user()->profile_photo }}"
+                                        alt="User-Profile-Image">
                                     <span>{{ Auth::user()->name }}</span>
                                     <i class="bi bi-chevron-down"></i>
                                 </div>
@@ -89,8 +98,8 @@
                                         <a href="#"> <i class="bi bi-gear"></i> Settings </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('user/profile/edit') }}"><i
-                                                class="bi bi-person-fill"></i>Edit Profile </a>
+                                        <a href="{{ url('user/profile/edit') }}"><i class="bi bi-person-fill"></i>Edit
+                                            Profile </a>
                                     </li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
@@ -120,6 +129,11 @@
     <script src="/deshboard/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="/deshboard/js/app.js"></script>
+
+    {{--Data table link --}}
+    <script src="/deshboard/js/jquery-3.5.1.js"></script>
+    <script src="/deshboard/js/jquery.dataTables.min.js"></script>
+    <script src="/deshboard/js/dataTables.bootstrap5.min.js"></script>
     {{-- <script>
         function onclickErrorHide() {
             var displayStatus = document.querySelector(".alert");

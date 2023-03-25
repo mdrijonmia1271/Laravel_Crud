@@ -133,6 +133,12 @@ function showPhoto(input) {
   }
 }
 
+//Add data table 
+$(document).ready(function() {
+  $('#dataTable').DataTable();
+});
+
+
 
 
 

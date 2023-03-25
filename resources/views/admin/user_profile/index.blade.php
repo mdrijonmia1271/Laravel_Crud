@@ -1,7 +1,10 @@
 @extends('layout')
 
+@section('title')
+    User Profile Page
+@endsection 
+@section('body')
 <div class="max-w-7 mx-auto t-10px">
-    @section('body')
         <div style="margin:20px" class="row">
             <div class="body_header">
                 <h1>Profile Edited Page</h1>

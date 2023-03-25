@@ -1,11 +1,13 @@
 
 @extends('layout')
 
-{{-- @include('layouts.navigation') --}}
+@section('title')
+    Deshboard Page
+@endsection 
+@section('body')
 <div class="max-w-7xl mx-auto t-10px">
-    @section('body')
     <div class="container">
-        <div class="row"">
+        <div class="row">
             <h1>Total User : {{ $total_users }}</h1>
             <table class="table table-striped table-bordered">
                 <thead style="background-color: rgb(120, 132, 164); padding-top:50px">
@@ -39,8 +41,8 @@
             {{ $users->links() }}
         </div>
     </div>
-    @endsection
+</div>
+@endsection
 
-    {{-- </div>
-    </div> --}}
+    {{-- </div>  --}}
     {{-- </x-app-layout> --}}

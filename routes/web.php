@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
 //CategoryController Route-------
 Route::get('category/index', [CategoryController::class, 'index']);
+Route::get('add/category/index', [CategoryController::class, 'addIndex']);
 Route::post('add/category', [CategoryController::class, 'create']);
 Route::get('edit/category/{id}', [CategoryController::class, 'edit']);
 Route::post('update/category', [CategoryController::class, 'update']);
