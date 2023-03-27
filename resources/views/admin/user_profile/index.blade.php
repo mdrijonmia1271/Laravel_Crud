@@ -1,5 +1,5 @@
-@extends('layout')
 
+@extends('layout')
 @section('title')
     User Profile Page
 @endsection 

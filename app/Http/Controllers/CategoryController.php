@@ -51,9 +51,16 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return back()->with('delete', 'Successfully Data Deleted!');
     }
+    public function deletedCategory()
+    {
+        return view('admin/category/Delete_data',[
+            'deleted_categories' => Category::onlyTrashed()->get()
+        ]);
+    }
+
     public function edit($id)
     {
-        return view('admin/category.edit', [
+        return view('admin/category/edit', [
             'categories' => Category::find($id)
         ]);
     }
@@ -86,16 +93,18 @@ class CategoryController extends Controller
                 Category::find($cate_id)->delete();
             }
         }
-        return back();
+        return back()->with('delete', 'Successfully Data Deleted!');
     }
     public function markRestore(Request $request)
     {
         if (isset($request->delete_category_id)) {
             if ($request['Restore_All']) {
                 Category::withTrashed()->whereIn('id', $request->delete_category_id)->restore();
+                return back()->with('restore', 'Successfully Data Restore!');
             }
             if ($request['Delete_All']) {
                 Category::withTrashed()->whereIn('id', $request->delete_category_id)->forceDelete();
+                return back()->with('forceDelete', 'Successfully Data Permanently Deleted!');
             }
         }
         return back();

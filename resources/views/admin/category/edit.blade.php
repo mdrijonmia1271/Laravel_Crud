@@ -1,12 +1,17 @@
 
 @extends('layout')
-
-<div class="max-w-7 mx-auto t-10px">
-    @section('body')
+@section('title')
+    Edit Category Page
+@endsection
+@section('body')
+<div class="max-w-7 mx-auto t-10px"> 
+    <div class="body_header">
+        <h1>Edit Category</h1>
+    </div>
         <div class="container">
             <div class="row">
                 <div class="col-4 m-auto">
-                    <div id="form">
+                    <div id="edit_category_form">
                         <form class="" action="{{ url('update/category') }}" method="post">
                             @csrf
                             <div class="add-category">Edit Category</div>

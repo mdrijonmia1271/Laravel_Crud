@@ -43,6 +43,7 @@ Route::post('add/category', [CategoryController::class, 'create']);
 Route::get('edit/category/{id}', [CategoryController::class, 'edit']);
 Route::post('update/category', [CategoryController::class, 'update']);
 Route::get('delete/category/{id}', [CategoryController::class, 'delete']);
+Route::get('deleted/category', [CategoryController::class, 'deletedCategory']);
 Route::get('restore/category/{id}', [CategoryController::class, 'restore']);
 Route::post('mark/restore-delete', [CategoryController::class, 'markRestore']);
 Route::post('mark/delete', [CategoryController::class, 'markDelete']);
