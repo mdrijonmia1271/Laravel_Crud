@@ -13,8 +13,8 @@
     <link rel="stylesheet" href=" {{ url('/deshboard/css/app.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="icon" href="https://cdn.pixabay.com/photo/2016/03/02/13/59/bird-1232416__340.png" type="image/gif"
-    sizes="16x16">
-    {{--Add data table css link --}}
+        sizes="16x16">
+    {{-- Add data table css link --}}
     <link rel="stylesheet" href=" {{ url('/deshboard/css/dataTable.bootstrap.min.css') }}" />
     <link rel="stylesheet" href=" {{ url('/deshboard/css/dataTables.bootstrap5.min.css') }}" />
 
@@ -130,7 +130,7 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="/deshboard/js/app.js"></script>
 
-    {{--Data table link --}}
+    {{-- Data table link --}}
     <script src="/deshboard/js/jquery-3.5.1.js"></script>
     <script src="/deshboard/js/jquery.dataTables.min.js"></script>
     <script src="/deshboard/js/dataTables.bootstrap5.min.js"></script>
