@@ -7,7 +7,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
+use App\Mail\ChangePasswordMail;
 
 class UserProfileEditController extends Controller
 {
@@ -47,7 +49,10 @@ class UserProfileEditController extends Controller
                 User::find(Auth::user()->id)->update([
                     'password' => Hash::make($request->password),
                 ]);
+                //Send a change password notification Email Start-------
+                Mail::to(Auth::user()->email)->send(new ChangePasswordMail());
                 return back();
+                //Send a change password notification Email End-------
             }
         } else {
             return back()->with('old_password_error', 'Your old password does not match with database !');

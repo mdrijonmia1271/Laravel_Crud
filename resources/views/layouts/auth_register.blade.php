@@ -1,14 +1,14 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="{{ asset('deshboard/css/user_login.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('deshboard/css/user_login.css') }}">
     <link rel="icon" href="https://cdn.pixabay.com/photo/2016/03/02/13/59/bird-1232416_960_720.png" type="image/gif"
-    sizes="16x16">
+        sizes="16x16">
     <title>Register Page</title>
 </head>
+
 <body>
     <div class="container">
         <div class="d-flex justify-content-center h-100">
@@ -20,25 +20,29 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <label style="color:rgb(245, 209, 209)" for="">Name</label>
-                        <div class="input-group form-group">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" name="name" class="form-control" placeholder="Enter Name" value="{{ old('name') }}" required>
+                            <input type="text" name="name" class="form-control" placeholder="Enter Name"
+                                value="{{ old('name') }}" required>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <br>
                         <label style="color:rgb(245, 209, 209)" for="">Email</label>
-                        <div class="input-group form-group">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="email" name="email" class="form-control" placeholder="Enter Email" value="{{ old('email') }}" required>
-                            @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            <input type="email" name="email" class="form-control" placeholder="Enter Email"
+                                value="{{ old('email') }}" required>
                         </div>
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <br>
                         <label style="color:rgb(245, 209, 209)" for="">Password</label>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -54,7 +58,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                            <input type="password_confirmation" name="password_confirmation" class="form-control"
+                                placeholder="Confirm Password" required>
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminPanelController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileEditController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +24,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+//  Email Verification Route Started---------------------------------
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+//  Email Verification Route End-------------------------------------
+
+
+//Deashboard Route-----------------
 Route::get('/dashboard', function () {
     // $users = User::orderBy('id', 'DESC')->get();
     // $users = User::latest()->paginate(2);
-    $users = User::latest()->simplePaginate(2);
+    $users = User::latest()->simplePaginate(5);
     $total_users = User::count();
     return view('dashboard', compact('users','total_users'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('send/newslatter', [Controller::class, 'sendNewslatter']);
 
+ 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

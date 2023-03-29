@@ -10,9 +10,8 @@ body{
     height: 100%;
     align-content: center;
     }
-    
     .card{
-    height: 350px;
+    height: 440px;
     margin-top: auto;
     margin-bottom: auto;
     width: 400px;
@@ -32,7 +31,6 @@ body{
     width: 50px;
     background-color: #FFC312;
     color: black;
-    border:0 !important;
     }
     
     input:focus{

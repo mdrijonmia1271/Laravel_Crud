@@ -6,7 +6,11 @@
 @endsection 
 @section('body')
 <div class="max-w-7xl mx-auto t-10px">
+    <div class="body_header">
+        <h1>Profile Edited Page</h1>
+    </div>
     <div class="container">
+        <a href="{{ url('send/newslatter') }}" class="mt-3 mb-3 btn btn-success">Send NewsLatter to {{ $total_users }} users</a>
         <div class="row">
             <h1>Total User : {{ $total_users }}</h1>
             <table class="table table-striped table-bordered">
