@@ -46,12 +46,11 @@
                         <ul class="metismenu" id="menu">
                             <li class="management">Management</li>
                             <li>
-                                <a href="{{ url('category/index') }}"><i class="bi bi-graph-up"></i><span>Products
-                                        Category</span>
+                                <a href="{{ route('product.index') }}"><i class="bi bi-graph-up"></i><span>Products</span>
                                 </a>
 
                                 <ul class="collapse show" id="services">
-                                    <li><a href="#">Product Sub Category</a></li>
+                                    <li><a href="{{ url('category/index') }}">Products Category</a></li>
                                     <li><a href="#">Product Colors</a></li>
                                     <li><a href="#">Product Sizes</a></li>
                                     <li><a href="#">Product Packet</a></li>

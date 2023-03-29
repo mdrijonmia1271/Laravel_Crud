@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.product.index'); 
     }
 
     /**
@@ -23,7 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.create', [
+            'active_categories' => Category::all()
+        ]);
     }
 
     /**
@@ -34,7 +39,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::insert($request->except('_token') + [
+            'created_at' => Carbon::now()
+        ]);
+        return back();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileEditController;
 use App\Models\User;
@@ -79,6 +80,9 @@ Route::get('user/profile/edit',[UserProfileEditController::class,'user_profile_e
 Route::post('user/profile/update',[UserProfileEditController::class,'user_profile_update']);
 Route::post('user/password/update',[UserProfileEditController::class,'user_password_update']);
 Route::post('profile/photo/change',[UserProfileEditController::class,'profile_photo_change']);
+
+//Product Resource Controller-----------
+Route::resource('product', ProductController::class);
 
 
 require __DIR__.'/auth.php';
