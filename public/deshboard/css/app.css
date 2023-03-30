@@ -76,3 +76,7 @@ body{
     padding: 7px;
     background-color:rgb(241, 220, 220);
 }
+#button_left{
+    float: left;
+    margin-left: 5px;
+}

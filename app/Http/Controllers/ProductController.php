@@ -16,7 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.product.index'); 
+        return view('admin.product.index', [
+            'products' => Product::all(),
+        ]); 
     }
 
     /**
@@ -27,7 +29,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.product.create', [
-            'active_categories' => Category::all()
+            'active_categories' => Category::all(),
         ]);
     }
 
@@ -39,10 +41,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'category_id' => 'required',
+            'product_name' => 'required',
+            'product_price' => 'required|numeric',
+            'product_quantity' => 'required|numeric',
+            'product_alert_quantity' => 'required|numeric',
+        ]);
         Product::insert($request->except('_token') + [
             'created_at' => Carbon::now()
         ]);
-        return back();
+        return back()->with('success', 'Successfully Data Inserted!');
     }
 
     /**
@@ -51,9 +60,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    
+     //Model route binding-------------------
+    public function show(Product $product)
     {
-        //
+        return view('admin.product.show', [
+            'active_categories' => Category::all(),
+            'product_info' =>$product,
+        ]);
     }
 
     /**
@@ -74,9 +88,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->except('_token', '_method'));
+        return redirect('product')->with('update', 'Successfully Data Updated!');
     }
 
     /**
@@ -85,8 +100,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return back()->with('delete', 'Successfully Data Deleted!');
     }
 }
