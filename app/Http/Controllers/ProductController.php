@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -41,6 +42,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $slug_link = Str::slug($request->product_name."-".Str::random(5));
+
         $request->validate([
             'category_id' => 'required',
             'product_name' => 'required',
@@ -49,6 +52,7 @@ class ProductController extends Controller
             'product_alert_quantity' => 'required|numeric',
         ]);
         Product::insert($request->except('_token') + [
+            'slug' => $slug_link,
             'created_at' => Carbon::now()
         ]);
         return back()->with('success', 'Successfully Data Inserted!');
@@ -62,12 +66,9 @@ class ProductController extends Controller
      */
     
      //Model route binding-------------------
-    public function show(Product $product)
+    public function show($id)
     {
-        return view('admin.product.show', [
-            'active_categories' => Category::all(),
-            'product_info' =>$product,
-        ]);
+        //
     }
 
     /**
@@ -76,9 +77,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', [
+            'active_categories' => Category::all(),
+            'product_info' =>$product,
+        ]);
     }
 
     /**

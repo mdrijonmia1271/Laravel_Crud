@@ -86,7 +86,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="mb-2">Photo</label>
-                                <input type="file" name="product_photo" class="form-control">
+                                <input type="file" name="product_thambnail_photo" class="form-control">
                             </div>
                             <br>
                             <button type="submit" class="btn btn-outline-primary">Add Product</button>

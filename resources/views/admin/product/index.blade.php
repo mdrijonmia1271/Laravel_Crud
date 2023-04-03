@@ -49,7 +49,7 @@
                                             <input type="checkbox" name="category_id[]" value="">
                                         </td> --}}
                                     <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td>{{ App\Models\Category::find($product->category_id)->category_name }}</td>
+                                    <td>{{ $product->RelationWithCategoryTable->category_name}}</td>
                                     <td>{{ $product->product_name }}</td>
                                     <td>{{ $product->product_price }}</td>
                                     <td>{{ $product->product_quantity }}</td>
@@ -59,20 +59,15 @@
                                             src="{{ asset('uploads/product_photos') }}/{{ $product->product_thambnail_photo }}"
                                             alt="not found">
                                     </td>
-                                    {{-- <td>{{ $category->created_at->format('d/m/Y h:i:s A') }}</td>
-                                        <td>
-                                            @isset($category->updated_at)
-                                                {{ $category->updated_at->diffForHumans() }}
-                                            @endisset
-                                        </td> --}}
                                     <td>
-                                       
-                                        <a id="button_left" href="{{ route('product.show', $product->id) }}" type="button"
+                                        <a id="button_left" href="{{ route('product.edit', $product->id) }}" type="button"
                                             class="btn btn-sm btn-outline-primary">Edit</a>
-                                        <form id="button_left" method="post" action="{{ route('product.destroy', $product->id) }}">
+                                        <form id="button_left" method="post"
+                                            action="{{ route('product.destroy', $product->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                            <button type="submit" onclick="return confirm('Are you sure to delete')"
+                                                class="btn btn-sm btn-outline-danger">Delete</button>
                                         </form>
 
 

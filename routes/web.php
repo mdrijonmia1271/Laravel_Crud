@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileEditController;
@@ -21,9 +22,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//frontend Route --------------------
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/contact', [FrontendController::class, 'contact']);
+Route::post('/contact/insert', [FrontendController::class, 'contactInsert']);
+Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
 
 
 
