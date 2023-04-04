@@ -17,7 +17,8 @@
     {{-- Add data table css link --}}
     <link rel="stylesheet" href=" {{ url('/deshboard/css/dataTable.bootstrap.min.css') }}" />
     <link rel="stylesheet" href=" {{ url('/deshboard/css/dataTables.bootstrap5.min.css') }}" />
-
+    {{-- Add font_awesome link --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {{-- <link
     href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;500;700;900&family=Rubik:wght@400;500;600;700&display=swap"
     rel="stylesheet" /> --}}
@@ -25,7 +26,6 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
-
 <body>
     <!-- sidebar menu start -->
     <div class="page-container">
@@ -54,6 +54,7 @@
                                     <li><a href="#">Product Colors</a></li>
                                     <li><a href="#">Product Sizes</a></li>
                                     <li><a href="#">Product Packet</a></li>
+                                    <li><a href="{{ url('contact/message') }}">Contact Message</a></li>
                                 </ul>
                             </li>
                             {{-- <li><a href="user.php" data-bs-toggle="collapse show"aria-expanded="true"><i

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
@@ -24,8 +25,6 @@ use Illuminate\Http\Request;
 
 //frontend Route --------------------
 Route::get('/', [FrontendController::class, 'index']);
-Route::get('/contact', [FrontendController::class, 'contact']);
-Route::post('/contact/insert', [FrontendController::class, 'contactInsert']);
 Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
 
 
@@ -48,16 +47,16 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 //Deashboard Route-----------------
-Route::get('/dashboard', function () {
-    // $users = User::orderBy('id', 'DESC')->get();
-    // $users = User::latest()->paginate(2);
-    $users = User::latest()->simplePaginate(5);
-    $total_users = User::count();
-    return view('dashboard', compact('users','total_users'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [Controller::class, 'deshboardIndex'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('send/newslatter', [Controller::class, 'sendNewslatter']);
 
- 
+// ContactInfo route-------------------
+Route::get('/contact', [ContactInfo::class, 'contact']);
+Route::post('/contact/insert', [ContactInfo::class, 'contactInsert']);
+Route::get('contact/message', [ContactInfo::class, 'contactMessage']);
+Route::get('contact/upload/download/{contact_id}', [ContactInfo::class, 'contactUploadDownload']);
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -79,13 +78,13 @@ Route::get('force/delete/category/{id}', [CategoryController::class, 'forceDelet
 
 
 //Profile Edit Conteroller_02 Route---------
-Route::get('user/profile/edit',[UserProfileEditController::class,'user_profile_edit']);
-Route::post('user/profile/update',[UserProfileEditController::class,'user_profile_update']);
-Route::post('user/password/update',[UserProfileEditController::class,'user_password_update']);
-Route::post('profile/photo/change',[UserProfileEditController::class,'profile_photo_change']);
+Route::get('user/profile/edit', [UserProfileEditController::class, 'user_profile_edit']);
+Route::post('user/profile/update', [UserProfileEditController::class, 'user_profile_update']);
+Route::post('user/password/update', [UserProfileEditController::class, 'user_password_update']);
+Route::post('profile/photo/change', [UserProfileEditController::class, 'profile_photo_change']);
 
 //Product Resource Controller-----------
 Route::resource('product', ProductController::class);
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -8,17 +8,25 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Mail\NewsLatter;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function sendNewslatter ()
+    public function deshboardIndex()
     {
-        foreach (User::all()->pluck('email') as  $email) {
+        $users = User::latest()->simplePaginate(5);
+        $total_users = User::count();
+        return view('dashboard', compact('users', 'total_users'));
+    }
+
+    public function sendNewslatter()
+    {
+        foreach (User::all()->pluck('email') as $email) {
             Mail::to($email)->send(new NewsLatter());
         }
         return back();
     }
+    
 }
