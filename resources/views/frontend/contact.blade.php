@@ -33,20 +33,25 @@
                 <div class="col-lg-8 col-12">
                     <div class="contact-form form-style">
                         <div class="cf-msg"></div>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <form action="{{ url('contact/insert') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" placeholder="Name" name="contact_name">
+                                    <input type="text" placeholder="Name" name="contact_name" required>
                                 </div>
                                 <div class="col-12  col-sm-6">
-                                    <input type="text" placeholder="Email" name="contact_email">
+                                    <input type="text" placeholder="Email" name="contact_email" required>
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" placeholder="Subject" name="contact_subject">
+                                    <input type="text" placeholder="Subject" name="contact_subject"required>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="contact-textarea" placeholder="Message" name="contact_message"></textarea>
+                                    <textarea class="contact-textarea" placeholder="Message" name="contact_message"required></textarea>
                                 </div>
                                 <div style="margin-top: 15px" class="col-12 ">
                                     <input class="form-control" type="file" name="contact_attachment">
