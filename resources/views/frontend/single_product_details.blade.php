@@ -370,7 +370,7 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="featured-product-wrap">
                             <div class="featured-product-img">
-                                <img src="{{ asset('uploads/product_photos') }}/{{ $product_info->product_thambnail_photo }}"
+                                <img src="{{ asset('uploads/product_photos') }}/{{ $related_product->product_thambnail_photo }}"
                                     alt="not found">
                             </div>
                             <div class="featured-product-content">

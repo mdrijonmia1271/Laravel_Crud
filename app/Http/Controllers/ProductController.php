@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductMultipleImage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -42,8 +44,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $slug_link = Str::slug($request->product_name."-".Str::random(5));
-
         $request->validate([
             'category_id' => 'required',
             'product_name' => 'required',
@@ -51,10 +51,36 @@ class ProductController extends Controller
             'product_quantity' => 'required|numeric',
             'product_alert_quantity' => 'required|numeric',
         ]);
-        Product::insert($request->except('_token') + [
+        $slug_link = Str::slug($request->product_name."-".Str::random(5));
+        $product_id = Product::insertGetId($request->except('_token','product_multiple_photo') + [
             'slug' => $slug_link,
             'created_at' => Carbon::now()
         ]);
+        if ($request->hasFile('product_thambnail_photo')) {
+            $uploaded_photo = $request->file('product_thambnail_photo');
+            $new_upload_name = $product_id . "." . $uploaded_photo->getClientOriginalExtension();
+            $new_upload_location = 'public/uploads/product_photos/' . $new_upload_name;
+            Image::make($uploaded_photo)->resize(600, 622)->save(base_path($new_upload_location), 50);
+            Product::find($product_id)->update([
+                'product_thambnail_photo' => $new_upload_name,
+            ]);
+        }
+        if($request->hasFile('product_multiple_photo')){
+            $flag = 1;
+          foreach ($request->file('product_multiple_photo') as $single_photo) {
+            $uploaded_photo = $single_photo;
+            $new_upload_name = $product_id."-".$flag . "." . $uploaded_photo->getClientOriginalExtension();
+            $new_upload_location = 'public/uploads/product_multiple_photos/' . $new_upload_name;
+            Image::make($uploaded_photo)->resize(600, 622)->save(base_path($new_upload_location), 50);
+            ProductMultipleImage::insert([
+                'product_id' => $product_id,
+                'prudct_multiple_image_name' => $new_upload_name,
+                'created_at' => Carbon::now(),
+            ]);
+            $flag++;
+          }
+        }
+      
         return back()->with('success', 'Successfully Data Inserted!');
     }
 
