@@ -28,43 +28,25 @@
                             <div class="item">
                                 <img src="{{ asset('uploads/product_photos') }}/{{ $product_info->product_thambnail_photo }}"
                                     alt="not found">
-                            </div>
+                            </div> 
+                            @foreach ($product_info->RelationWithMultipleImageTable as $single_photo)
                             <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/3.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/4.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/5.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/6.jpg" alt="">
-                            </div>
+                                <img src="{{ asset('uploads/product_multiple_photos') }}/{{ $single_photo->prudct_multiple_image_name }}"
+                                    alt="not found">
+                            </div>    
+                            @endforeach                          
                         </div>
                         <div class="product-thumbnil-active  owl-carousel">
                             <div class="item">
                                 <img src="{{ asset('uploads/product_photos') }}/{{ $product_info->product_thambnail_photo }}"
                                     alt="not found">
                             </div>
+                            @foreach ($product_info->RelationWithMultipleImageTable as $single_photo)
                             <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/3.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/4.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/5.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('frontend') }}/images/product/product-details/6.jpg" alt="">
-                            </div>
+                                <img src="{{ asset('uploads/product_multiple_photos') }}/{{ $single_photo->prudct_multiple_image_name }}"
+                                    alt="not found">
+                            </div>    
+                            @endforeach 
                         </div>
                     </div>
                 </div>
@@ -117,16 +99,7 @@
                 <div class="col-12">
                     <div class="tab-content">
                         <div class="tab-pane active" id="description">
-                            <div class="description-wrap">
-                                <p>we denounce with righteous indignation and dislike men who are so beguiled and
-                                    demoralized by the charms of pleasure of the moment, so blinded by desire, that they
-                                    cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to
-                                    those who fail in their duty through weakness of will, which is the same as saying
-                                    through shrinking from toil and pain. </p>
-                                <p>These cases are perfectly simple and easy to distinguish. In a free hour, when our power
-                                    of choice is untrammelled and when nothing prevents our being able to do what we like
-                                    best, every pleasure is to be welcomed and every pain avoided. </p>
-                            </div>
+                            <div class="description-wrap">{{ $product_info->product_long_description }}</div>
                         </div>
                         <div class="tab-pane" id="tag">
                             <div class="faq-wrap" id="accordion">

@@ -26,6 +26,7 @@ use Illuminate\Http\Request;
 //frontend Route --------------------
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
+Route::get('/shop', [FrontendController::class, 'shop']);
 
 
 

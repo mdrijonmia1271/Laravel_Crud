@@ -16,5 +16,8 @@ class Category extends Model
         'category_description',
         'category_photo',
     ];
+    function RelationWithProductTable(){
+        return $this->hasMany('App\Models\Product', 'category_id', 'id')->withTrashed();
+    }
 }
 

@@ -15,6 +15,10 @@ class Product extends Model
 
     //One to One RelationShip with Catagory Table----------------
     function RelationWithCategoryTable(){
-        return $this->hasOne('App\Models\Category', 'id', 'category_id')->withTrashed( );
+        return $this->hasOne('App\Models\Category', 'id', 'category_id')->withTrashed();
+    }
+    //On to many Relationship with ProductMultipleImage teble--------
+    function RelationWithMultipleImageTable(){
+        return $this->hasMany('App\Models\ProductMultipleImage', 'product_id', 'id')->withTrashed();
     }
 }
