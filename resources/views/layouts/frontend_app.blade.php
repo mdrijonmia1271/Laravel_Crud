@@ -105,7 +105,7 @@
                                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li>
-                                    <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
+                                    <a href="javascript:void(0);">Shop({{ product_total_count() }}) <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
                                         <li><a href="{{ url('shop') }}">Shop Page</a></li>
                                         <li><a href="single-product.html">Product Details</a></li>
