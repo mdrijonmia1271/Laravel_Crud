@@ -24,13 +24,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//frontend Route --------------------
-Route::get('/', [FrontendController::class, 'index']);
-Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
-Route::get('/shop', [FrontendController::class, 'shop']);
-
-
-
 //  Email Verification Route Started---------------------------------
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -52,11 +45,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/dashboard', [Controller::class, 'deshboardIndex'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('send/newslatter', [Controller::class, 'sendNewslatter']);
 
-// ContactInfo route-------------------
-Route::get('/contact', [ContactInfo::class, 'contact']);
-Route::post('/contact/insert', [ContactInfo::class, 'contactInsert']);
-Route::get('contact/message', [ContactInfo::class, 'contactMessage']);
-Route::get('contact/upload/download/{contact_id}', [ContactInfo::class, 'contactUploadDownload']);
 
 
 Route::middleware('auth')->group(function () {
@@ -87,6 +75,17 @@ Route::post('profile/photo/change', [UserProfileEditController::class, 'profile_
 
 //Product Resource Controller-----------
 Route::resource('product', ProductController::class);
+
+//frontend Route --------------------
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
+Route::get('/shop', [FrontendController::class, 'shop']);
+
+// ContactInfo route-------------------
+Route::get('/contact', [ContactInfo::class, 'contact']);
+Route::post('/contact/insert', [ContactInfo::class, 'contactInsert']);
+Route::get('contact/message', [ContactInfo::class, 'contactMessage']);
+Route::get('contact/upload/download/{contact_id}', [ContactInfo::class, 'contactUploadDownload']);
 
 //CartController Route----------
 Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');

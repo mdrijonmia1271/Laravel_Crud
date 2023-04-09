@@ -177,23 +177,23 @@
                                     @php
                                         $sub_total = 0;
                                     @endphp
+                                    {{-- @dd(cart_items()) --}}
                                     @foreach (cart_items() as $cart_item)
                                     <li class="cart-items">
                                         <div class="cart-img">
                                             <img src="{{ asset('frontend') }}/images/cart/1.jpg" alt="">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html">{{ $cart_item->product->product_name }}</a>
+                                            <a href="{{ url('product/details') }}/{{ $cart_item->product->slug }}">{{ @$cart_item->product->product_name }}</a>
                                             <span>QTY : {{ $cart_item->product_quantity }}</span>
-                                            <p>${{ $cart_item->product_quantity * $cart_item->product->product_price }}</p>
+                                            <p>${{ $cart_item->product_quantity * @$cart_item->product->product_price }}</p>
                                             @php
-                                                $sub_total = $sub_total + ($cart_item->product_quantity * $cart_item->product->product_price);
-                                            @endphp
+                                                $sub_total = $sub_total + ($cart_item->product_quantity * @$cart_item->product->product_price);
+                                            @endphp 
                                             <i class="fa fa-times"></i>
                                         </div>
                                     </li>                               
                                     @endforeach
-
                                     <li>Subtotol: <span class="pull-right">${{ $sub_total }}</span></li>
                                     <li>
                                         <button>Check Out</button>
