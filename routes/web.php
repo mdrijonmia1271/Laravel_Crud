@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactInfo;
 use App\Http\Controllers\Controller;
@@ -86,6 +87,9 @@ Route::post('profile/photo/change', [UserProfileEditController::class, 'profile_
 
 //Product Resource Controller-----------
 Route::resource('product', ProductController::class);
+
+//CartController Route----------
+Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
 
 
 require __DIR__ . '/auth.php';
