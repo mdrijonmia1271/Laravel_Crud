@@ -180,23 +180,24 @@
                                     {{-- @dd(cart_items()) --}}
                                     @foreach (cart_items() as $cart_item)
                                     <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend') }}/images/cart/1.jpg" alt="">
+                                        <div class="cart-img" style="height: 10x width:15px">
+                                            <img src="{{ asset('uploads/product_photos') }}/{{ $cart_item->product->product_thambnail_photo }}" alt="not found">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="{{ url('product/details') }}/{{ $cart_item->product->slug }}">{{ @$cart_item->product->product_name }}</a>
+                                            <a href="#">{{ @$cart_item->product->product_name }}</a>
                                             <span>QTY : {{ $cart_item->product_quantity }}</span>
                                             <p>${{ $cart_item->product_quantity * @$cart_item->product->product_price }}</p>
                                             @php
                                                 $sub_total = $sub_total + ($cart_item->product_quantity * @$cart_item->product->product_price);
                                             @endphp 
-                                            <i class="fa fa-times"></i>
+                                            <a href="{{ route('cart.remove', $cart_item->id) }}"><i class="fa fa-times"></i></a>
+                                            
                                         </div>
                                     </li>                               
                                     @endforeach
-                                    <li>Subtotol: <span class="pull-right">${{ $sub_total }}</span></li>
+                                    <li>Subtotal: <span class="pull-right">${{ $sub_total }}</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        <a href="{{ route('cart.index') }}"><button>go to cart</button></a>
                                     </li>
                                 </ul>
                             </li>

@@ -545,10 +545,10 @@ header-area start
 }
 
 .search-cart-wrapper li>ul.cart-wrap {
-    width: 250px;
+    width: 300px;
     background: #333;
     right: 0;
-    padding: 20px;
+    padding: 15px;
     left: auto;
 }
 
@@ -567,7 +567,9 @@ header-area start
 
 .cart-img {
     float: left;
-    margin-right: 15px;
+    margin-right: 10px;
+    height: 80px;
+    width: 80px;
 }
 
 .cart-wrap li .cart-content {
@@ -2590,6 +2592,9 @@ shop single style here
 
     cart style here
 ===========================*/
+.table-width{
+    width: 1110px;
+}
 
 .cart-wrap td,
 .cart-wrap th {
@@ -2605,9 +2610,10 @@ shop single style here
 .cart-wrap thead {
     background: #000;
     color: #fff;
+    width: 500px;
 }
 .cart-wrap .product {
-    width: 25%;
+    width: 15%;
 }
 
 .cart-wrap .product a {
@@ -2621,6 +2627,7 @@ shop single style here
 
 .cart-wrap .quantity {
     position: relative;
+    padding: 10px;
 }
 
 .cart-wrap th {
@@ -2629,7 +2636,7 @@ shop single style here
 }
 
 .cart-wrap .quantity .qtybutton {
-    top: 50%;
+    top: 47%;
     left: 27px;
     transform: translateY(-51%);
     -webkit-transform: translateY(-51%);

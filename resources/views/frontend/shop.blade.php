@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h3><a href="single-product.html">{{ $product->product_name }}</a></h3>
+                                <h3><a href="{{ url('product/details') }}/{{ $product->slug }}">{{ $product->product_name }}</a></h3>
                                 <p class="pull-left">${{ $product->product_price }}
 
                                 </p>

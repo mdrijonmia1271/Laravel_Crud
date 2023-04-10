@@ -88,7 +88,9 @@ Route::get('contact/message', [ContactInfo::class, 'contactMessage']);
 Route::get('contact/upload/download/{contact_id}', [ContactInfo::class, 'contactUploadDownload']);
 
 //CartController Route----------
+Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
+Route::get('cart/remove/{cart_id}', [CartController::class, 'remove'])->name('cart.remove');
 
 
 require __DIR__ . '/auth.php';

@@ -10,6 +10,11 @@ use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
+
+    public function index(){
+        return view('frontend.cart');
+    }
+
     public function store(Request $request)
     {
         if (Cookie::get('g_cart_id')) {
@@ -29,6 +34,10 @@ class CartController extends Controller
             ]);
         }
         return back();
+    }
 
+    public function remove($cart_id){
+        Cart::find($cart_id)->delete();
+        return back()->with('remove', 'Product Removed From Cart!');
     }
 }
