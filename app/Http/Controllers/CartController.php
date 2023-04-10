@@ -40,4 +40,12 @@ class CartController extends Controller
         Cart::find($cart_id)->delete();
         return back()->with('remove', 'Product Removed From Cart!');
     }
+    public function update(Request $request){
+       foreach ($request->product_info as $cart_id => $product_quantity) {
+        Cart::find($cart_id)->update([
+            'product_quantity' => $product_quantity,
+        ]);
+       }
+       return back()->with('update', 'Product Updated!');
+    }
 }

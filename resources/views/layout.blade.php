@@ -55,6 +55,7 @@
                                     <li><a href="#">Product Sizes</a></li>
                                     <li><a href="#">Product Packet</a></li>
                                     <li><a href="{{ url('contact/message') }}">Contact Message</a></li>
+                                    <li><a href="{{ url('coupon') }}">Coupon</a></li>
                                 </ul>
                             </li>
                             {{-- <li><a href="user.php" data-bs-toggle="collapse show"aria-expanded="true"><i

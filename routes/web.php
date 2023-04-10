@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactInfo;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -90,7 +91,11 @@ Route::get('contact/upload/download/{contact_id}', [ContactInfo::class, 'contact
 //CartController Route----------
 Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
+Route::post('cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::get('cart/remove/{cart_id}', [CartController::class, 'remove'])->name('cart.remove');
 
+
+//Product Resource Controller-----------
+Route::resource('coupon', CouponController::class);
 
 require __DIR__ . '/auth.php';
