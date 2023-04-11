@@ -3429,4 +3429,10 @@ ol {
 .about-area{
     padding-bottom: 0;
 }
-/*mobal-subscribe*/
+
+/* Add Css of coupon_badge button */
+.coupon_badge{
+    background-color: #be59d3;
+    padding: 7px;
+    margin: 3px;
+}

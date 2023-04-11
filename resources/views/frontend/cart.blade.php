@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap text-center">
+                    <div class="breadcumb-wrap text-center">RelationWithUserTable
                         <h2>Shopping Cart</h2>
                         <ul>
                             <li><a href="index.html">Home</a></li>
@@ -33,6 +33,12 @@
                             {{ session('update') }}
                         </div>
                     @endif
+                    @if ($error_message != "")
+                        <div class="alert alert-danger">
+                            {{ $error_message }}
+                        </div>
+                    @endif
+                    
                     <form action="{{ route('cart.update') }}" method="post">
                         @csrf
                         <table class="table-striped cart-wrap table-width">
@@ -107,9 +113,12 @@
                     <h3>Cupon</h3>
                     <p>Enter Your Cupon Code if You Have One</p>
                     <div class="cupon-wrap">
-                        <input type="text" placeholder="Cupon Code">
-                        <button>Apply Cupon</button>
+                        <input type="text" placeholder="Cupon Code" id="apply_coupon_input" value="{{ $coupon_name }}">
+                        <button type="button" id="apply_coupon_btn">Apply Cupon</button>
                     </div>
+                    @foreach ($valid_coupons as $valid_coupon)
+                    <button class="coupon_badge badge available_coupon_btn" type="button" value="{{ $valid_coupon->coupon_name }}">{{ $valid_coupon->coupon_name }} - Shop more than or equal {{ $valid_coupon->minimum_purchase_amount }}</button>
+                    @endforeach
                 </div>
             </div>
             <div class="col-xl-3 offset-xl-5 col-lg-4 offset-lg-3 col-md-6">
@@ -117,12 +126,14 @@
                     <h3>Cart Totals</h3>
                     <ul>
                         <li><span class="pull-left">Subtotal </span>${{ $cart_sub_total }}</li>
-                        <li><span class="pull-left"> Total </span> $380.00</li>
+                        <li><span class="pull-left">Discount(%) </span>{{ $discount_amount }}%</li>
+                        <li><span class="pull-left">Discount Amount </span>${{ ($cart_sub_total * $discount_amount)/100 }}</li>
+                        <li><span class="pull-left"> Total </span> ${{ $cart_sub_total - ($cart_sub_total * $discount_amount)/100 }}</li>
                     </ul>
                     @if ($flag == 1)
                         <a href="#">Please solve the issue first</a>
                     @else
-                        <a href="checkout.html">Proceed to Checkout</a>
+                        <a href="#">Proceed to Checkout</a>
                     @endif
                 </div>
             </div>
@@ -133,4 +144,19 @@
     </div>
     </div>
     <!-- cart-area end -->
+@endsection
+@section('footer_scripts')
+    <script>
+        $(document).ready(function(){
+            $('#apply_coupon_btn').click(function(){
+                var apply_coupon_input = $('#apply_coupon_input').val();
+                var link_to_go = "{{ url('cart/index') }}/"+apply_coupon_input;
+                window.location.href = link_to_go;
+            });
+            $('.available_coupon_btn').click(function(){
+                $('#apply_coupon_input').val($(this).val());
+            });
+        });
+    </script>
+    
 @endsection

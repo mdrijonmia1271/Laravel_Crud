@@ -90,6 +90,7 @@ Route::get('contact/upload/download/{contact_id}', [ContactInfo::class, 'contact
 
 //CartController Route----------
 Route::get('cart/index', [CartController::class, 'index'])->name('cart.index');
+Route::get('cart/index/{coupon_name}', [CartController::class, 'index']);
 Route::post('cart/store', [CartController::class, 'store'])->name('cart.store');
 Route::post('cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::get('cart/remove/{cart_id}', [CartController::class, 'remove'])->name('cart.remove');
