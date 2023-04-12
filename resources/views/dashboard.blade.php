@@ -7,7 +7,12 @@
 @section('body')
 <div class="max-w-7xl mx-auto t-10px">
     <div class="body_header">
-        <h1>Profile Edited Page</h1>
+        <h1>This Deshboard Or User Page</h1>
+        @if (Auth::user()->role == 2)
+            Your are costomer
+        @else
+            Your are Admin
+        @endif
     </div>
     <div class="container">
         <a href="{{ url('send/newslatter') }}" class="mt-3 mb-3 btn btn-success">Send NewsLatter to {{ $total_users }} users</a>

@@ -77,10 +77,12 @@ Route::post('profile/photo/change', [UserProfileEditController::class, 'profile_
 //Product Resource Controller-----------
 Route::resource('product', ProductController::class);
 
-//frontend Route --------------------
+//frontend Controller Route --------------------
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
 Route::get('/shop', [FrontendController::class, 'shop']);
+Route::get('costomer/register', [FrontendController::class, 'costomerRegister']);
+Route::post('costomer/register/post', [FrontendController::class, 'costomerRegisterPost']);
 
 // ContactInfo route-------------------
 Route::get('/contact', [ContactInfo::class, 'contact']);

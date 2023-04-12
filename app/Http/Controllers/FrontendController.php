@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie; 
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
@@ -34,6 +37,20 @@ class FrontendController extends Controller
             'categories' => Category::all(),
             'products' => Product::all(),
         ]);
+    }
+
+    public function costomerRegister(){
+        return view('frontend.costomerRegister');
+    }
+    public function costomerRegisterPost(Request $request){
+        User::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => 2,
+            'password' => Hash::make($request->password),
+            'created_at' => Carbon::now(),
+        ]);
+        return back();
     }
 
 

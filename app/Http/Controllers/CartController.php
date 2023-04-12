@@ -26,12 +26,11 @@ class CartController extends Controller
                 } else {
                     $sub_total = 0;
                     foreach (cart_items() as $cart_item) {
-                        echo $sub_total += ($cart_item->product_quantity * $cart_item->product->product_price);
+                        $sub_total += ($cart_item->product_quantity * $cart_item->product->product_price);
                     }
                     if (Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchase_amount > $sub_total) {
                         $error_message = "You have to shop more than or equal " . Coupon::where('coupon_name', $coupon_name)->first()->minimum_purchase_amount;
                     } else {
-                        echo "Good";
                         $discount_amount = Coupon::where('coupon_name', $coupon_name)->first()->discount_amount;
                     }
 
