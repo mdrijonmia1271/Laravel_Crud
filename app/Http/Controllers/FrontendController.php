@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,10 +40,10 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function costomerRegister(){
-        return view('frontend.costomerRegister');
+    public function customerRegister(){
+        return view('frontend.customerRegister');
     }
-    public function costomerRegisterPost(Request $request){
+    public function customerRegisterPost(Request $request){
         User::insert([
             'name' => $request->name,
             'email' => $request->email,
@@ -50,6 +51,9 @@ class FrontendController extends Controller
             'password' => Hash::make($request->password),
             'created_at' => Carbon::now(),
         ]);
+        if(Auth::attempt(['email' =>$request->email, 'password' => $request->password ])){
+            return redirect('customer/home');
+        }
         return back();
     }
 

@@ -37,27 +37,35 @@
                             alt="Admin Panel"></a>
                 </div>
             </div>
+            @if (Auth::user()->role == 1)
             <div class="header-text">
                 <a href="{{ route('dashboard') }}"><i class="bi bi-house-door"></i>Dashboard</a>
             </div>
+            @else
+            <div class="header-text">
+                <a href="{{ url('/') }}"><i class="bi bi-house-door"></i>Home</a>
+            </div>
+            @endif
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li class="management">Management</li>
-                            <li>
-                                <a href="{{ route('product.index') }}"><i class="bi bi-graph-up"></i><span>Products</span>
-                                </a>
+                           @if (Auth::user()->role == 1)
+                           <li>
+                            <a href="{{ route('product.index') }}"><i class="bi bi-graph-up"></i><span>Products</span>
+                            </a>
 
-                                <ul class="collapse show" id="services">
-                                    <li><a href="{{ url('category/index') }}">Products Category</a></li>
-                                    <li><a href="#">Product Colors</a></li>
-                                    <li><a href="#">Product Sizes</a></li>
-                                    <li><a href="#">Product Packet</a></li>
-                                    <li><a href="{{ url('contact/message') }}">Contact Message</a></li>
-                                    <li><a href="{{ url('coupon') }}">Coupon</a></li>
-                                </ul>
-                            </li>
+                            <ul class="collapse show" id="services">
+                                <li><a href="{{ url('category/index') }}">Products Category</a></li>
+                                <li><a href="#">Product Colors</a></li>
+                                <li><a href="#">Product Sizes</a></li>
+                                <li><a href="#">Product Packet</a></li>
+                                <li><a href="{{ url('contact/message') }}">Contact Message</a></li>
+                                <li><a href="{{ url('coupon') }}">Coupon</a></li>
+                            </ul>
+                        </li>
+                           @endif
                             {{-- <li><a href="user.php" data-bs-toggle="collapse show"aria-expanded="true"><i
                     class="bi bi-graph-up"></i><span>Registration </span>
                 </a>

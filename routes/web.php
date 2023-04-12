@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -43,7 +44,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 //Deashboard Route-----------------
-Route::get('/dashboard', [Controller::class, 'deshboardIndex'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [Controller::class, 'deshboardIndex'])->middleware(['auth', 'verified', 'checkrole'])->name('dashboard');
 Route::get('send/newslatter', [Controller::class, 'sendNewslatter']);
 
 
@@ -55,7 +56,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //CategoryController Route-------
-Route::get('category/index', [CategoryController::class, 'index']);
+Route::get('category/index', [CategoryController::class, 'index'])->middleware('checkrole');
 Route::get('add/category/index', [CategoryController::class, 'addIndex']);
 Route::post('add/category', [CategoryController::class, 'create']);
 Route::get('edit/category/{id}', [CategoryController::class, 'edit']);
@@ -81,8 +82,8 @@ Route::resource('product', ProductController::class);
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('/product/details/{slug}', [FrontendController::class, 'productDetails']);
 Route::get('/shop', [FrontendController::class, 'shop']);
-Route::get('costomer/register', [FrontendController::class, 'costomerRegister']);
-Route::post('costomer/register/post', [FrontendController::class, 'costomerRegisterPost']);
+Route::get('customer/register', [FrontendController::class, 'customerRegister']);
+Route::post('customer/register/post', [FrontendController::class, 'customerRegisterPost']);
 
 // ContactInfo route-------------------
 Route::get('/contact', [ContactInfo::class, 'contact']);
@@ -98,7 +99,11 @@ Route::post('cart/update', [CartController::class, 'update'])->name('cart.update
 Route::get('cart/remove/{cart_id}', [CartController::class, 'remove'])->name('cart.remove');
 
 
-//Product Resource Controller-----------
+//Coupon Resource Controller-----------
 Route::resource('coupon', CouponController::class);
+
+
+//Customer Controller Route-------------
+Route::get('customer/home', [CustomerController::class, 'home']);
 
 require __DIR__ . '/auth.php';

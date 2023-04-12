@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public function deshboardIndex()
     {
         $users = User::latest()->simplePaginate(5);

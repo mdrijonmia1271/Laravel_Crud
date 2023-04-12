@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
-                    <form action="{{ url('costomer/register/post') }}" method="post">
+                    <form action="{{ url('customer/register/post') }}" method="post">
                         @csrf
                         <div class="account-form form-style">
                             <p>Name *</p>
@@ -36,7 +36,7 @@
                             <input type="Password" name="conform_password" placeholder="Enter Confirm Password">
                             <button type="submit">Register</button>
                             <div class="text-center">
-                                <a href="login.html">Or Login</a>
+                                <a href="{{ route('login') }}">Or Login</a>
                             </div>
                         </div>
                     </form>

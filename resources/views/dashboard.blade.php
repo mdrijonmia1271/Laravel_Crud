@@ -9,7 +9,7 @@
     <div class="body_header">
         <h1>This Deshboard Or User Page</h1>
         @if (Auth::user()->role == 2)
-            Your are costomer
+            Your are customer
         @else
             Your are Admin
         @endif
