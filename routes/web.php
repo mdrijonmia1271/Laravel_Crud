@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\GithunController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileEditController;
@@ -105,5 +106,9 @@ Route::resource('coupon', CouponController::class);
 
 //Customer Controller Route-------------
 Route::get('customer/home', [CustomerController::class, 'home']);
+
+//Githun Controller Route-------------
+Route::get('login/github', [GithunController::class, 'redirectToProvider']);
+Route::get('login/github/callback', [GithunController::class, 'handleProviderCallback']);
 
 require __DIR__ . '/auth.php';

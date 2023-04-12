@@ -11,8 +11,6 @@
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->
     {{-- All site icons show link --}}
-    <link href="{{ asset('frontend') }}/css/bootstrap-combined.no-icons.min.css"rel="stylesheet">
-    <link href="{{ asset('frontend') }}/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- bootstrap v4.0.0-beta.2 css -->
