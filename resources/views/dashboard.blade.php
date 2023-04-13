@@ -17,7 +17,7 @@
     <div class="container">
         <a href="{{ url('send/newslatter') }}" class="mt-3 mb-3 btn btn-success">Send NewsLatter to {{ $total_users }} users</a>
         <div class="row">
-            <h1>Total User : {{ $total_users }}</h1>
+            
             <table class="table table-striped table-bordered">
                 <thead style="background-color: rgb(120, 132, 164); padding-top:50px">
                     <tr>
