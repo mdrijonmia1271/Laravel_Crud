@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactInfo;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CouponController;
@@ -110,5 +111,8 @@ Route::get('customer/home', [CustomerController::class, 'home']);
 //Githun Controller Route-------------
 Route::get('login/github', [GithunController::class, 'redirectToProvider']);
 Route::get('login/github/callback', [GithunController::class, 'handleProviderCallback']);
+
+//Checkout Controller Route-----------
+Route::get('checkout', [CheckoutController::class, 'index']);
 
 require __DIR__ . '/auth.php';
