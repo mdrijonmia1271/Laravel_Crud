@@ -25,7 +25,7 @@
                 <div class="col-lg-8">
                     <div class="checkout-form form-style">
                         <h3>Billing Details</h3>
-                        <form action="{{ url('checkout/post') }}" method="post"> 
+                        <form action="{{ url('checkout/post') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -42,62 +42,58 @@
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Country *</p>
-                                    <select id="s_country" name="country_id">
-                                        <option value="1">Bangladesh</option>
-                                        <option value="2">Pakistan</option>
-                                        <option value="3">Afganistan</option>
+                                    <select id="country_list_1" name="country_id">
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>City *</p>
-                                    <select id="s_country" name="city_id">
-                                        <option value="1">Dhaka</option>
-                                        <option value="2">Islamabad</option>
-                                        <option value="3">Kabul</option>
+                                    <select id="city_list_1" name="city_id">
+                                            <option value="">Select A City</option>
                                     </select>
-                                </div>                                
+                                </div>
                                 <div class="col-12">
                                     <p>Your Address *</p>
                                     <input type="text" name="address">
-                                </div>   
+                                </div>
                                 <div class="col-12">
-                                    <input id="toggle2" type="checkbox">
+                                    <input id="toggle2" type="checkbox" name="shipping_address_status" value="1">
                                     <label class="fontsize" for="toggle2">Ship to a different address</label>
                                     <div class="row" id="open2">
                                         <div class="col-12">
                                             <p>Name *</p>
-                                            <input type="text">
+                                            <input type="text" name="shipping_name">
                                         </div>
                                         <div class=" col-12">
                                             <p>Email Address *</p>
-                                            <input type="email">
+                                            <input type="email" name="shipping_email">
                                         </div>
                                         <div class="col-12">
                                             <p>Phone No. *</p>
-                                            <input type="text">
+                                            <input type="text" name="shipping_phone_number">
                                         </div>
                                         <div class="col-12">
                                             <p>Country *</p>
-                                            <select id="s_country">
-                                                <option value="">Bangladesh</option>
-                                                <option value="">Pakistan</option>
-                                                <option value="">Afganistan</option>
+                                            <select id="country_list_2" name="shipping_country_id">
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-12">
                                             <p>City *</p>
-                                            <select>
-                                                <option value="">Dhaka</option>
-                                                <option value="">Islamabad</option>
-                                                <option value="">Kabul</option>
+                                            <select id="city_list_2" name="shipping_city_id">
+                                                <option value="">Select A City</option>
                                             </select>
-                                        </div>                                
+                                        </div>
                                         <div class="col-12">
                                             <p>Your Address *</p>
-                                            <input type="text">
-                                        </div> 
+                                            <input type="text" name="shipping_address">
+                                        </div>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="col-12">
                                     <p>Order Notes </p>
                                     <textarea name="notes" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
@@ -110,28 +106,79 @@
                         <h3>Your Order</h3>
                         <ul class="total-cost">
                             @foreach (cart_items() as $cart_item)
-                            <li>{{ $cart_item->product->product_name }} X {{ $cart_item->product_quantity }} <span class="pull-right">${{ $cart_item->product->product_price * $cart_item->product_quantity }}</span></li>
+                                <li>{{ $cart_item->product->product_name }} X {{ $cart_item->product_quantity }} <span
+                                        class="pull-right">${{ $cart_item->product->product_price * $cart_item->product_quantity }}</span>
+                                </li>
                             @endforeach
-                            <li>Subtotal <span class="pull-right"><strong>${{ session('cart_sub_total') }}</strong></span></li>
+                            <li>Subtotal <span class="pull-right"><strong>${{ session('cart_sub_total') }}</strong></span>
+                            </li>
                             <li>Discount <span class="pull-right">${{ session('discount_amount') }}</span></li>
-                            <li>Total<span class="pull-right">${{ session('cart_sub_total') - session('discount_amount') }}</span></li>
+                            <li>Total<span
+                                    class="pull-right">${{ session('cart_sub_total') - session('discount_amount') }}</span>
+                            </li>
                         </ul>
-                        <ul class="payment-method">  
+                        <ul class="payment-method">
                             <li>
                                 <input id="delivery" type="radio" name="payment_option" value="1" checked>
                                 <label for="delivery">Cash on Delivery</label>
-                            </li>                          
+                            </li>
                             <li>
                                 <input id="card" type="radio" name="payment_option" value="2">
                                 <label for="card">Credit Card</label>
                             </li>
                         </ul>
                         <button type="submit">Place Order</button>
-                    </form>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- checkout-area end -->
+@endsection
+@section('footer_scripts')
+    <script>
+        $(document).ready(function() {
+            $('#country_list_1').select2();
+            $('#city_list_1').select2();
+            $('#country_list_1').change(function() {
+                var country_id = $(this).val();
+                //ajax setup
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                //ajax response start
+                $.ajax({
+                    type : 'POST',
+                    url : '/get/city/list/ajax',
+                    data : {country_id:country_id},
+                    success : function (data) {
+                        $('#city_list_1').html(data);
+                    }
+                });
+                //ajax response end
+            })
+            $('#country_list_2').change(function() {
+                var country_id = $(this).val();
+                //ajax setup
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                //ajax response start
+                $.ajax({
+                    type : 'POST',
+                    url : '/get/city/list/ajax',
+                    data : {country_id:country_id},
+                    success : function (data) {
+                        $('#city_list_2').html(data);
+                    }
+                });
+                //ajax response end
+            })
+        })
+    </script>
 @endsection
