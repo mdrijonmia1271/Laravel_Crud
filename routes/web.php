@@ -114,5 +114,6 @@ Route::get('login/github/callback', [GithunController::class, 'handleProviderCal
 
 //Checkout Controller Route-----------
 Route::get('checkout', [CheckoutController::class, 'index']);
+Route::post('checkout/post', [CheckoutController::class, 'checkoutPost']);
 
 require __DIR__ . '/auth.php';
