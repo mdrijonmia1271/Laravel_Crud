@@ -30,19 +30,19 @@
                             <div class="row">
                                 <div class="col-12">
                                     <p>Name *</p>
-                                    <input type="text" name="name" value="{{ $user->name }}">
+                                    <input type="text" name="name" value="{{ $user->name }}" required>
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Email Address *</p>
-                                    <input type="email" name="email" value="{{ $user->email }}">
+                                    <input type="email" name="email" value="{{ $user->email }}" required>
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Phone No. *</p>
-                                    <input type="text" name="phone_number">
+                                    <input type="text" name="phone_number" required>
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Country *</p>
-                                    <select id="country_list_1" name="country_id">
+                                    <select id="country_list_1" name="country_id" required>
                                         @foreach ($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
@@ -50,13 +50,13 @@
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>City *</p>
-                                    <select id="city_list_1" name="city_id">
+                                    <select id="city_list_1" name="city_id" required>
                                             <option value="">Select A City</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
                                     <p>Your Address *</p>
-                                    <input type="text" name="address">
+                                    <input type="text" name="address" required>
                                 </div>
                                 <div class="col-12">
                                     <input id="toggle2" type="checkbox" name="shipping_address_status" value="1">
@@ -112,7 +112,7 @@
                             @endforeach
                             <li>Subtotal <span class="pull-right"><strong>${{ session('cart_sub_total') }}</strong></span>
                             </li>
-                            <li>Discount <span class="pull-right">${{ session('discount_amount') }}</span></li>
+                            <li>Discount ({{ session('coupon_name') }}) <span class="pull-right">${{ session('discount_amount') }}</span></li>
                             <li>Total<span
                                     class="pull-right">${{ session('cart_sub_total') - session('discount_amount') }}</span>
                             </li>
