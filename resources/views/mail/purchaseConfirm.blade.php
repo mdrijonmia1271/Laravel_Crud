@@ -1,0 +1,1 @@
+<h1>Your Order has been taken!</h1>

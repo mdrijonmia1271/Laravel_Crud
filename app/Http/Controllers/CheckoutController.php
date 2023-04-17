@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PurchaseConfirm;
 use App\Models\Billing;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\order;
 use App\Models\Order_detail;
+use App\Models\Product;
 use App\Models\Shipping;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -81,8 +84,13 @@ class CheckoutController extends Controller
                 'product_price' => $cart_item->product->product_price,
                 'created_at' => Carbon::now(),
             ]);
+            //Product Table Decrement----------
+            Product::find($cart_item->product_id)->decrement('product_quantity', $cart_item->product_quantity);
+            //Delete from Cart Table-----------
+            $cart_item->forceDelete();
         }
-        echo "inserted";
+        Mail::to($request->email)->send(new PurchaseConfirm);
+        return redirect('cart/index')->with('success', 'Your Order Successfully Complete');
     }
     public function getCityListAjax(Request $request)
     {

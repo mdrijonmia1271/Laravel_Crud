@@ -10,4 +10,7 @@ class Order extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    function Order_detail(){
+        return $this->hasMany('App\Models\Order_detail');
+    }
 }
