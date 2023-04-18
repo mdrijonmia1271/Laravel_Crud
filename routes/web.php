@@ -117,4 +117,8 @@ Route::get('checkout', [CheckoutController::class, 'index']);
 Route::post('checkout/post', [CheckoutController::class, 'checkoutPost']);
 Route::post('get/city/list/ajax', [CheckoutController::class, 'getCityListAjax']);
 
+//Test Mail
+Route::get('test/mail', [CheckoutController::class, 'testMail']);
+
+
 require __DIR__ . '/auth.php';
