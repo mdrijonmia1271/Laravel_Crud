@@ -42,14 +42,19 @@ class PurchaseConfirm extends Mailable
      * @return \Illuminate\Mail\Mailables\Content
      */
 
-    public function content()
-    {
-        
-        return new Content(
-            // compact('infos')
-            view:'mail.purchaseConfirm',
-        );
-    }
+    // public function content()
+    // {
+    //     return new Content(
+    //         view:'mail.purchaseConfirm',
+    //         compact:'infos',
+    //     );
+    // }
+    public function build()
+{
+    return $this->view('mail.purchaseConfirm',[
+        'product_order_details' => $this->order_detail_infos
+    ]);
+}
 
     /**
      * Get the attachments for the message.
