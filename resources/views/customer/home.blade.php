@@ -1,7 +1,4 @@
 
-@php
-    $error_
-@endphp
 
 @extends('layout')
 @section('title')
@@ -34,6 +31,7 @@
                                 <th class="het" scope="col">Discount Amount</th>
                                 <th class="het" scope="col">Coupon Name</th>
                                 <th class="het" scope="col">Total</th>
+                                <th class="het" scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,13 +45,10 @@
                                     <td>{{ $order->coupon_name }}</td>
                                     <td>{{ $order->total }}</td>
                                     
-                                    {{-- <td>
-                                        <a href="{{ url('edit/category/') }}/{{ $category->id }}" type="button"
-                                            class="btn btn-sm btn-outline-primary">Edit</a>
-                                            <a href="{{ url('delete/category/') }}/{{ $category->id }}"
-                                                onclick="return confirm('Are you sure to delete')" type="button"
-                                                class="btn btn-sm btn-outline-danger">Delete</a>
-                                            </td> --}}
+                                    <td>
+                                        <a href="{{ url('customer/invoice/download') }}/{{ $order->id }}"><i class="fa fa-download"></i> Download Invoice</a>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td colspan="50">

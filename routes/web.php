@@ -107,6 +107,7 @@ Route::resource('coupon', CouponController::class);
 
 //Customer Controller Route-------------
 Route::get('customer/home', [CustomerController::class, 'home']);
+Route::get('customer/invoice/download/{order_id}', [CustomerController::class, 'customerInvoiceDowload']);
 
 //Githun Controller Route-------------
 Route::get('login/github', [GithunController::class, 'redirectToProvider']);
