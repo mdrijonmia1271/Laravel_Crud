@@ -11,6 +11,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GithunController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\UserProfileEditController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -120,6 +121,10 @@ Route::post('get/city/list/ajax', [CheckoutController::class, 'getCityListAjax']
 
 //Test Mail
 Route::get('test/mail', [CheckoutController::class, 'testMail']);
+
+//Stripe Payment getway
+Route::get('stripe', [StripePaymentController::class, 'stripe']);
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
 
 require __DIR__ . '/auth.php';
