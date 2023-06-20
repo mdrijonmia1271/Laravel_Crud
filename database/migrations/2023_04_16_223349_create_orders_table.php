@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('coupon_name');
             $table->float('total');
             $table->integer('payment_option');
+            $table->integer('pyment_status')->default(1);
             $table->integer('billing_id');
             $table->integer('shipping_id');
             $table->timestamps();

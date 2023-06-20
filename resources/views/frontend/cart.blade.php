@@ -22,7 +22,7 @@
     <div class="cart-area ptb-100">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                {{-- {{ print_r(session()->all()) }}  --}}
                     @if (session('remove'))
                         <div class="alert alert_warning">
                             {{ session('remove') }}
@@ -36,6 +36,11 @@
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('pay_success'))
+                        <div class="alert alert-success">
+                            {{ session('pay_success') }}
                         </div>
                     @endif
                     @if ($error_message != "")

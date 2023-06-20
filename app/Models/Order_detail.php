@@ -11,6 +11,8 @@ class Order_detail extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['stars', 'review'];
+
     function product(){
         return $this->belongsTo('App\Models\Product');
     }

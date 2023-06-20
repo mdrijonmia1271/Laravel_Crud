@@ -87,6 +87,7 @@ Route::get('/product/details/{slug}', [FrontendController::class, 'productDetail
 Route::get('/shop', [FrontendController::class, 'shop']);
 Route::get('customer/register', [FrontendController::class, 'customerRegister']);
 Route::post('customer/register/post', [FrontendController::class, 'customerRegisterPost']);
+Route::post('review/post', [FrontendController::class, 'reviewPost']);
 
 // ContactInfo route-------------------
 Route::get('/contact', [ContactInfo::class, 'contact']);

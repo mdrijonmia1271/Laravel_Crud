@@ -27,6 +27,7 @@
                                 <th class="het" scope="col">SL</th>
                                 <th class="het" scope="col">Date</th>
                                 <th class="het" scope="col">Payment Method</th>
+                                <th class="het" scope="col">Payment Status</th>
                                 <th class="het" scope="col">Sub Total</th>
                                 <th class="het" scope="col">Discount Amount</th>
                                 <th class="het" scope="col">Coupon Name</th>
@@ -39,7 +40,20 @@
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $order->created_at }}</td>
-                                    <td>{{ $order->payment_option }}</td>
+                                    <td>
+                                        @if ($order->payment_option == 1)
+                                            Cash on delivery
+                                        @else
+                                            Card
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($order->payment_status == 1)
+                                           <span>Unpaid</span>
+                                        @else
+                                            <span>Paid</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $order->sub_total }}</td>
                                     <td>{{ $order->discount_amount }}</td>
                                     <td>{{ $order->coupon_name }}</td>

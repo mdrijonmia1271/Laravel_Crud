@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order_detail;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
@@ -26,10 +27,22 @@ class FrontendController extends Controller
         $product_info = Product::where('slug', $slug)->firstOrfail();
         $related_product = Product::where('category_id', $product_info->category_id)->where('id', '!=', $product_info->id)->limit(4)->get();
 
+        $show_review_form = 0;
+        if(Order_detail::where('user_id', Auth::id())->where('product_id', $product_info->id)->whereNull('review')->exists()){
+            $order_details_id = Order_detail::where('user_id', Auth::id())->where('product_id', $product_info->id)->whereNull('review')->first()->id;
+            $show_review_form = 1;
+        }else{
+            $order_details_id = 0;
+            $show_review_form = 2;
+        }
+        $reviews = Order_detail::where('product_id', $product_info->id)->whereNotNull('review')->get();
         return view('frontend.single_product_details', [
             'product_info' => $product_info,
             'related_products' => $related_product,
-        ]);
+            'show_review_form' => $show_review_form,
+            'order_details_id' => $order_details_id,
+            'reviews' => $reviews 
+        ]); 
 
     }
 
@@ -54,6 +67,15 @@ class FrontendController extends Controller
         if(Auth::attempt(['email' =>$request->email, 'password' => $request->password ])){
             return redirect('customer/home');
         }
+        return back();
+    }
+
+
+    public function reviewPost(Request $request){
+        Order_detail::find($request->order_details_id)->update([
+            'stars' => $request->stars,
+            'review' => $request->review,
+        ]);
         return back();
     }
 

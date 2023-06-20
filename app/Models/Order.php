@@ -10,6 +10,8 @@ class Order extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $fillable = ['payment_status'];
     function Order_detail(){
         return $this->hasMany('App\Models\Order_detail');
     }
