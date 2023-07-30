@@ -9,6 +9,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GithunController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripePaymentController;
@@ -80,6 +81,8 @@ Route::post('profile/photo/change', [UserProfileEditController::class, 'profile_
 
 //Product Resource Controller-----------
 Route::resource('product', ProductController::class);
+Route::resource('order', OrderController::class);
+Route::get('order/cancel/{order_id}', [OrderController::class, 'cancel'])->name('order.cancel');
 
 //frontend Controller Route --------------------
 Route::get('/', [FrontendController::class, 'index']);

@@ -63,6 +63,7 @@
                                 <li><a href="#">Product Packet</a></li>
                                 <li><a href="{{ url('contact/message') }}">Contact Message</a></li>
                                 <li><a href="{{ url('coupon') }}">Coupon</a></li>
+                                <li><a href="{{ url('order') }}">Order</a></li>
                             </ul>
                         </li>
                            @endif
